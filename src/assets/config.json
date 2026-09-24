@@ -46,7 +46,8 @@
         "description": "University/facility of Choice",
         "facilityBackend": "http://localhost:8888"
       }
-    ]
+    ],
+    "keywordsPresets": ["OpenEM", "SomeOtherPreset"]
   },
   "logbookEnabled": true,
   "loginFormEnabled": true,

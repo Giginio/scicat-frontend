@@ -52,6 +52,7 @@ export interface DatasetDetailComponentConfig {
 export interface IngestorComponentConfig {
   ingestorEnabled: boolean;
   ingestorAutodiscoveryOptions?: IngestorAutodiscovery[];
+  keywordsPresets?: string[];
 }
 
 export enum DatasetViewFieldType {

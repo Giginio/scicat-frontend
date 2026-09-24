@@ -36,6 +36,7 @@ import { selectUserSettingsPageViewModel } from "state-management/selectors/user
 import { Subscription } from "rxjs";
 import { ReturnedUserDto } from "@scicatproject/scicat-sdk-ts-angular";
 import * as defaultMetadataSchema from "shared/modules/scientific-metadata/defaultMetadata.json";
+import { AppConfigService } from "app-config.service";
 
 @Component({
   selector: "ingestor-new-transfer-dialog-page",
@@ -93,6 +94,7 @@ export class IngestorNewTransferDialogPageComponent
   constructor(
     private store: Store,
     private cdr: ChangeDetectorRef,
+    private appConfigService: AppConfigService,
   ) {}
 
   ngOnInit() {
@@ -203,6 +205,10 @@ export class IngestorNewTransferDialogPageComponent
     return this.createNewTransferData.selectedMethod;
   }
 
+  get appConfig() {
+  return this.appConfigService.getConfig();
+  }
+
   async loadExtractionMethods(): Promise<void> {
     this.store.dispatch(
       fromActions.getExtractionMethods({
@@ -229,7 +235,7 @@ export class IngestorNewTransferDialogPageComponent
       this.createNewTransferData.editorMode === "INGESTION" ||
       this.createNewTransferData.editorMode === "EDITOR"
     ) {
-      this.createNewTransferData.scicatHeader["keywords"] = ["OpenEM"];
+      this.createNewTransferData.scicatHeader["keywords"] = this.appConfig.ingestorComponent?.keywordsPresets ?? ["OpenEM"];
     }
 
     this.createNewTransferData.scicatHeader["license"] = "MIT License";
